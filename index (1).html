@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aanya Gupta</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FAFAF8;
+    --off: #F3F0EB;
+    --ink: #1C1C1A;
+    --mid: #6B6560;
+    --faint: #E2DDD8;
+    --accent: #8B6F5E;
+    --accent2: #4A7B6F;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3.5rem; height: 58px;
+    background: rgba(250,250,248,0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--faint);
+  }
+  .nav-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem; font-weight: 500; letter-spacing: 0.04em;
+  }
+  nav ul { list-style: none; display: flex; gap: 2.8rem; }
+  nav ul a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    transition: color 0.25s; position: relative; padding-bottom: 2px;
+  }
+  nav ul a::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  nav ul a:hover { color: var(--ink); }
+  nav ul a:hover::after { transform: scaleX(1); }
+  nav ul a.active { color: var(--ink); }
+  nav ul a.active::after { transform: scaleX(1); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding-top: 58px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Image side */
+  .hero-img {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-inner {
+    width: 100%; height: 100%;
+    min-height: calc(100vh - 58px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    background: #201A14;
+  }
+  .hero-img-inner::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% 65%, rgba(180,130,70,0.2) 0%, transparent 65%),
+      radial-gradient(ellipse 90% 55% at 50% 100%, rgba(110,70,40,0.4) 0%, transparent 55%),
+      linear-gradient(180deg, #181310 0%, #261C12 45%, #181310 100%);
+    z-index: 0;
+  }
+  .hero-img-inner::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 25% 65% at 25% 25%, rgba(255,200,100,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 25% 65% at 75% 15%, rgba(255,200,100,0.05) 0%, transparent 55%);
+    z-index: 1;
+  }
+  .hero-photo {
+    position: absolute; inset: 0; z-index: 2;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: none;
+  }
+  .hero-photo[src]:not([src=""]) { display: block; }
+
+  .img-placeholder-content {
+    position: relative; z-index: 3;
+    text-align: center; padding: 3rem;
+  }
+  .img-placeholder-ring {
+    width: 68px; height: 68px;
+    border: 1.5px solid rgba(255,255,255,0.18); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 1.4rem;
+  }
+  .img-placeholder-ring svg { width: 26px; height: 26px; opacity: 0.35; }
+  .img-placeholder-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25); line-height: 1.9;
+  }
+  .hero-img-caption {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(to top, rgba(15,10,6,0.68) 0%, transparent 100%);
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .hero-img-caption-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .hero-img-caption-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.59rem; letter-spacing: 0.13em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* Text side */
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4.5rem 5rem 5rem;
+  }
+  .hero-kicker {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.8rem;
+    opacity: 0; animation: fadeUp 0.7s 0.15s forwards;
+  }
+  .hero-heading {
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
+  }
+  .hero-heading em { font-style: italic; color: var(--accent); }
+  .hero-bio {
+    font-size: 1.05rem; line-height: 1.85; color: var(--mid);
+    max-width: 44ch; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.7s 0.45s forwards;
+  }
+  .hero-bio strong { color: var(--ink); font-weight: 500; }
+
+  /* Contact block — prominent */
+  .hero-contact {
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .contact-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 1rem;
+  }
+
+  .contact-items {
+    display: flex; flex-direction: column; gap: 0;
+    border-top: 1px solid var(--faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 0; border-bottom: 1px solid var(--faint);
+  }
+
+  .contact-row-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mid); width: 76px; flex-shrink: 0;
+  }
+
+  .contact-row-val {
+    font-size: 0.97rem; color: var(--ink);
+  }
+
+  .contact-row-val a {
+    color: var(--accent); transition: opacity 0.2s;
+    border-bottom: 1px solid rgba(139,111,94,0.3);
+  }
+
+  .contact-row-val a:hover { opacity: 0.65; }
+
+  .hero-nav-links {
+    display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.5rem;
+  }
+
+  .page-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.6rem 1.4rem; transition: all 0.25s;
+  }
+
+  .page-link.solid { background: var(--ink); color: var(--white); }
+  .page-link.solid:hover { background: var(--accent); }
+  .page-link.outline { border: 1px solid var(--faint); color: var(--mid); }
+  .page-link.outline:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--faint); padding: 1.8rem 3.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--mid); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 1.8rem; }
+    nav ul { gap: 1.4rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-img { order: -1; }
+    .hero-img-inner { min-height: 62vw !important; }
+    .hero-text { padding: 3.5rem 2rem; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Aanya Gupta</a>
+  <ul>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="honors.html">Honors</a></li>
+    <li><a href="leadership.html">Leadership</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+
+  <!-- LEFT: TEDx photo -->
+  <div class="hero-img">
+    <div class="hero-img-inner">
+      <!--
+        ADD YOUR PHOTO:
+        Replace src="" with your TEDx image path, e.g. src="tedx.jpg"
+        The placeholder below will automatically hide once src is set.
+      -->
+      <img class="hero-photo" src="talk_snapshot.png" alt="Aanya Gupta speaking at TEDxBISV">
+
+      <div class="img-placeholder-content">
+        <div class="img-placeholder-ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.3">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+          </svg>
+        </div>
+        <div class="img-placeholder-label">
+          Your TEDx stage photo goes here<br>
+          Set src="your-photo.jpg" on .hero-photo
+        </div>
+      </div>
+    </div>
+    <div class="hero-img-caption">
+      <div class="hero-img-caption-dot"></div>
+      <div class="hero-img-caption-text">TEDxBISV Youth — "Synergy Within: The Power of Polymathy"</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: name + bio + contact -->
+  <div class="hero-text">
+    <div class="hero-kicker">Basis Independent Silicon Valley · Class of 2026</div>
+    <h1 class="hero-heading">Aanya<br><em>Gupta</em></h1>
+    <p class="hero-bio">
+      I'm a published researcher, speaker, and founder exploring how ideas move across disciplines — from modeling immune responses in the lab to creating moments of joy through dance. My work sits at the intersection of <strong>computer science, biology, and creativity</strong>, shaped by experiences ranging from research at Stanford University to founding and building the Dancing Hearts Project. Driven by a mission to turn interdisciplinary thinking into meaningful impact, I focus on translating ideas into action through leadership, rigor, and curiosity — guided by the belief that <strong>the most important progress happens when we connect worlds that don't usually meet.</strong>
+    </p>
+
+    <div class="hero-contact">
+      <div class="contact-label">Get in touch</div>
+      <div class="contact-items">
+        <div class="contact-row">
+          <div class="contact-row-label">Email</div>
+          <div class="contact-row-val"><a href="/cdn-cgi/l/email-protection#7514141b0c1435100d14180519105b161a18"><span class="__cf_email__" data-cfemail="2b4a4a45524a6b4e534a465b474e05484446">[email&#160;protected]</span></a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-label">LinkedIn</div>
+          <div class="contact-row-val"><a href="#" target="_blank">linkedin.com/in/aanyagupta</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-label">TEDx Talk</div>
+          <div class="contact-row-val"><a href="#" target="_blank">Watch on YouTube ↗</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-row-label">Organization</div>
+          <div class="contact-row-val"><a href="#" target="_blank">dancinghearts.org ↗</a></div>
+        </div>
+      </div>
+
+      <div class="hero-nav-links">
+        <a href="research.html" class="page-link solid">Research</a>
+        <a href="honors.html" class="page-link outline">Honors</a>
+        <a href="leadership.html" class="page-link outline">Leadership</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Aanya Gupta</p>
+  <p>Basis Independent Silicon Valley · Bay Area, CA</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const photo = document.queryS

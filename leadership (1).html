@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership — Aanya Gupta</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FAFAF8; --off: #F3F0EB; --ink: #1C1C1A;
+    --mid: #6B6560; --faint: #E2DDD8; --accent: #8B6F5E; --accent2: #4A7B6F;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white); color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.05rem; line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3.5rem; height: 58px;
+    background: rgba(250,250,248,0.94); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--faint);
+  }
+  .nav-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; font-weight: 500; letter-spacing: 0.04em; }
+  nav ul { list-style: none; display: flex; gap: 2.8rem; }
+  nav ul a {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    transition: color 0.25s; position: relative; padding-bottom: 2px;
+  }
+  nav ul a::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  nav ul a:hover { color: var(--ink); }
+  nav ul a:hover::after { transform: scaleX(1); }
+  nav ul a.active { color: var(--ink); }
+  nav ul a.active::after { transform: scaleX(1); }
+
+  .page-header { padding-top: 58px; border-bottom: 1px solid var(--faint); }
+  .page-header-inner { max-width: 1100px; margin: 0 auto; padding: 5rem 3.5rem 3.5rem; }
+  .page-eyebrow {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem;
+  }
+  .page-title { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; }
+  .page-title em { font-style: italic; color: var(--accent); }
+
+  .page-content { max-width: 1100px; margin: 0 auto; padding: 0 3.5rem 6rem; }
+
+  .section-label {
+    font-family: 'Jost', sans-serif; font-size: 0.63rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding: 3rem 0 1rem; border-top: 1px solid var(--faint);
+  }
+
+  /* UNIFIED CARD GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1rem; }
+  .card-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+  .card-full { grid-column: 1 / -1; }
+
+  .activity-card {
+    border: 1px solid var(--faint); padding: 1.7rem;
+    transition: border-color 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .activity-card:hover { border-color: var(--accent); }
+
+  .activity-card-org {
+    font-family: 'Jost', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.32rem;
+  }
+  .activity-card-title { font-size: 1rem; font-weight: 500; margin-bottom: 0.2rem; line-height: 1.3; }
+  .activity-card-role {
+    font-family: 'Jost', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.7rem;
+  }
+  .activity-card-desc { font-size: 0.9rem; color: var(--mid); line-height: 1.7; flex: 1; }
+
+  .card-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 1.2rem; border-top: 1px solid var(--faint);
+  }
+  .card-stat { padding: 0.8rem 0.5rem 0.8rem 0; }
+  .card-stat-num { font-size: 1.3rem; font-weight: 400; color: var(--accent); line-height: 1; }
+  .card-stat-label {
+    font-family: 'Jost', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-top: 0.2rem;
+  }
+
+  .card-press { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .press-link {
+    font-family: 'Jost', sans-serif; font-size: 0.57rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.22rem 0.65rem; background: rgba(139,111,94,0.09);
+    color: var(--accent); border-radius: 2px; transition: background 0.2s;
+  }
+  .press-link:hover { background: rgba(139,111,94,0.18); }
+
+  footer {
+    border-top: 1px solid var(--faint); padding: 1.8rem 3.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--mid); }
+
+  .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.in { opacity:1; transform:none; }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 1.8rem; }
+    nav ul { gap: 1.4rem; }
+    .page-header-inner { padding: 4rem 2rem 2.5rem; }
+    .page-content { padding: 0 2rem 5rem; }
+    .card-grid, .card-grid.two-col { grid-template-columns: 1fr; }
+    .card-stats { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Aanya Gupta</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="honors.html">Honors</a></li>
+    <li><a href="leadership.html" class="active">Leadership</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Community &amp; Impact</div>
+    <h1 class="page-title">Leadership &amp; <em>Service</em></h1>
+  </div>
+</div>
+
+<div class="page-content">
+
+  <!-- SERVICE -->
+  <div class="section-label reveal">Service</div>
+  <div class="card-grid reveal">
+    <div class="activity-card card-full">
+      <div class="activity-card-org">Nonprofit · Points of Light Award</div>
+      <div class="activity-card-title">Dancing Hearts Project</div>
+      <div class="activity-card-role">Founder &amp; President / CEO · Grades 10–12</div>
+      <div class="activity-card-desc">Founded Dancing Hearts Project with a mission to bring intergenerational connection and the mental and physical benefits of dance to seniors and physically challenged individuals. Born from at-home dance parties with my grandparents, the idea has grown into a national nonprofit spanning 5 states, with 27+ volunteers, 46+ partner centers, and 1,000+ seniors served. I lead all strategic partnerships and advisor relationships (6 partnerships, 8 advisors), developed the organization's long-term growth vision, and personally teach dance classes at senior living communities including Saratoga Retirement Community, Priya Living, MorningStar, and Chateau Cupertino. I choreograph routines tailored for students 60+ — both standing and seated — across Bollywood, fusion, and classic styles. Recognized by Senator Dave Cortese, Representative Ro Khanna, Assemblymember Alex Lee, Mayor Lisa Gillmor, and Councilmember Raj Chahal.</div>
+      <div class="card-stats">
+        <div class="card-stat">
+          <div class="card-stat-num">1,000+</div>
+          <div class="card-stat-label">Seniors served</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-stat-num">46+</div>
+          <div class="card-stat-label">Partner centers</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-stat-num">27+</div>
+          <div class="card-stat-label">Volunteers</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-stat-num">5</div>
+          <div class="card-stat-label">States</div>
+        </div>
+      </div>
+      <div class="card-press">
+        <a class="press-link" href="https://sanfranciscopost.com/dancing-hearts-project-brings-joy-wellness-and-connection-to-bay-area-seniors/" target="_blank">San Francisco Post ↗</a>
+        <a class="press-link" href="https://indiacurrents.com/teen-dancer-transforms-senior-care-through-movement-in-south-bay/" target="_blank">India Currents ↗</a>
+        <a class="press-link" href="https://soundcloud.com/shows-archive/teen-vibe-check-23rd-2025?in=shows-archive/sets/teen-vibe-check&si=ee296fcfab0947069be682324ddedff1&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" target="_blank">Radio Zindagi ↗</a>
+        <a class="press-link" href="https://www.pointsoflight.org/awards/spreading-the-joy-of-dancing/" target="_blank">Points of Light ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPEAKING -->
+  <div class="section-label reveal">Speaking</div>
+  <div class="card-grid reveal">
+    <div class="activity-card">
+      <div class="activity-card-org">TEDx Basis Independent Silicon Valley</div>
+      <div class="activity-card-title">"Synergy Within: The Power of Polymathy"</div>
+      <div class="activity-card-role">Speaker · Grade 11</div>
+      <div class="activity-card-desc">Challenged the prevailing notion that success comes from specialization. Explored how history's greatest innovations were driven by those who connected ideas across fields, and encouraged the audience to embrace diverse passions and break out of rigid career paths. <a href="#" style="color:var(--accent); border-bottom: 1px solid rgba(139,111,94,0.3);">Watch the talk ↗</a></div>
+    </div>
+  </div>
+
+  <!-- ACADEMIC LEADERSHIP -->
+  <div class="section-label reveal">Academic Leadership</div>
+  <div class="card-grid two-col reveal">
+    <div class="activity-card">
+      <div class="activity-card-org">Basis Independent Silicon Valley</div>
+      <div class="activity-card-title">Research Journal Club</div>
+      <div class="activity-card-role">President &amp; Editor-in-Chief · Grades 10–12</div>
+      <div class="activity-card-desc">Led a peer-written and reviewed scientific journal. Expanded scope to include senior capstone research, initiated first-ever collaborations with other STEM clubs, and achieved highest membership in the club's history. Managed club agenda, deadlines, and trained all new members. Oversaw biannual editing and publication cycle.</div>
+    </div>
+    <div class="activity-card">
+      <div class="activity-card-org">Random Math, Inc. · Cupertino, CA</div>
+      <div class="activity-card-title">Math Teaching Assistant</div>
+      <div class="activity-card-role">Paid Position · Grades 9–11</div>
+      <div class="activity-card-desc">Ran weekly classes of ~20 elementary and middle school students preparing for competitive math exams including the AMC8 and AMC10. Applied critical thinking to explain challenging concepts and encouraged students to build confidence by having them present solutions in class.</div>
+    </div>
+  </div>
+
+  <!-- DANCE & PERFORMANCE -->
+  <div class="section-label reveal">Dance &amp; Performance</div>
+  <div class="card-grid two-col reveal">
+    <div class="activity-card">
+      <div class="activity-card-org">Bollywood Dance Club · Basis Independent SV</div>
+      <div class="activity-card-title">Captain</div>
+      <div class="activity-card-role">Grades 9–11</div>
+      <div class="activity-card-desc">Choreographed and performed at school events year-round, including pep rallies and games. Achieved record participation (23+ students). Organized the first-ever fundraiser during tenure, raising $3,000.</div>
+    </div>
+    <div class="activity-card">
+      <div class="activity-card-org">Mona Khan Company · Cupertino, CA</div>
+      <div class="activity-card-title">Primary Instructor</div>
+      <div class="activity-card-role">Paid Position · Grades 10–11</div>
+      <div class="activity-card-desc">Lead weekly classes of 18 kids (ages 3–12) preparing for two yearly showcases. Train and manage assistant instructors, plan class agenda, and serve as primary parent contact.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Aanya Gupta</p>
+  <p><a href="index.html" style="color:var(--accent);">← Back to Home</a></p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (e.target.dataset.d || 0) + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.dataset.d = i * 60;
+    io.observe(el);
+  });
+</script>
+</body>
+</html>

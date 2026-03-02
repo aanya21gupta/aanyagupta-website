@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Aanya Gupta</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FAFAF8; --off: #F3F0EB; --ink: #1C1C1A;
+    --mid: #6B6560; --faint: #E2DDD8; --accent: #8B6F5E; --accent2: #4A7B6F;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white); color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.05rem; line-height: 1.75; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3.5rem; height: 58px;
+    background: rgba(250,250,248,0.94); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--faint);
+  }
+  .nav-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem; font-weight: 500; letter-spacing: 0.04em;
+  }
+  nav ul { list-style: none; display: flex; gap: 2.8rem; }
+  nav ul a {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    transition: color 0.25s; position: relative; padding-bottom: 2px;
+  }
+  nav ul a::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  nav ul a:hover { color: var(--ink); }
+  nav ul a:hover::after { transform: scaleX(1); }
+  nav ul a.active { color: var(--ink); }
+  nav ul a.active::after { transform: scaleX(1); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding-top: 58px;
+    border-bottom: 1px solid var(--faint);
+  }
+  .page-header-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 3.5rem 3.5rem;
+    display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 2rem;
+  }
+  .page-eyebrow {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+  .page-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 400; line-height: 1.1; letter-spacing: -0.01em;
+  }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-header-meta {
+    font-family: 'Jost', sans-serif; font-size: 0.68rem;
+    color: var(--mid); letter-spacing: 0.05em; text-align: right;
+    line-height: 1.8;
+  }
+
+  /* MAIN */
+  .page-content { max-width: 1100px; margin: 0 auto; padding: 0 3.5rem 6rem; }
+
+  /* INTRO blurb */
+  .research-intro {
+    padding: 3rem 0 3rem;
+    border-bottom: 1px solid var(--faint);
+    max-width: 72ch;
+  }
+  .research-intro p {
+    font-size: 1.1rem; line-height: 1.85; color: var(--mid);
+  }
+  .research-intro p strong { color: var(--ink); font-weight: 500; }
+
+  /* Section divider */
+  .research-section-label {
+    font-family: 'Jost', sans-serif; font-size: 0.63rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding: 2.5rem 0 0;
+  }
+
+  /* Research list */
+  .research-list { border-top: 1px solid var(--faint); margin-top: 1rem; }
+
+  .research-item {
+    display: grid; grid-template-columns: 200px 1fr; gap: 2.5rem;
+    padding: 2.4rem 0.5rem; border-bottom: 1px solid var(--faint);
+    transition: background 0.2s, padding 0.2s;
+  }
+  .research-item:hover {
+    background: var(--off); padding-left: 1rem; padding-right: 1rem; margin: 0 -0.5rem;
+  }
+
+  .r-venue {
+    font-family: 'Jost', sans-serif; font-size: 0.63rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem;
+  }
+  .r-year { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--mid); margin-bottom: 0.6rem; }
+  .r-badge {
+    display: inline-block; font-family: 'Jost', sans-serif; font-size: 0.55rem;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    padding: 0.2rem 0.65rem; border: 1px solid currentColor; border-radius: 20px;
+  }
+  .r-badge.author { color: var(--accent); }
+  .r-badge.coauthor { color: var(--accent2); }
+
+  .r-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.35rem; line-height: 1.38; }
+  .r-title a { color: inherit; border-bottom: 1px solid rgba(139,111,94,0.35); transition: border-color 0.2s, color 0.2s; }
+  .r-title a:hover { color: var(--accent); border-color: var(--accent); }
+  .r-journal { font-style: italic; font-size: 0.93rem; color: var(--mid); margin-bottom: 0.55rem; }
+  .r-desc { font-size: 0.95rem; color: var(--mid); line-height: 1.75; }
+  .r-link {
+    display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.9rem;
+    font-family: 'Jost', sans-serif; font-size: 0.62rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); border-bottom: 1px solid rgba(139,111,94,0.3);
+    transition: opacity 0.2s;
+  }
+  .r-link:hover { opacity: 0.65; }
+
+  /* Posters */
+  .poster-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1rem; }
+  .poster-card {
+    border: 1px solid var(--faint); padding: 1.5rem;
+    transition: border-color 0.25s;
+  }
+  .poster-card:hover { border-color: var(--accent); }
+  .poster-card-conf {
+    font-family: 'Jost', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem;
+  }
+  .poster-card-title { font-size: 0.97rem; font-weight: 500; line-height: 1.4; margin-bottom: 0.3rem; }
+  .poster-card-year { font-family: 'Jost', sans-serif; font-size: 0.68rem; color: var(--mid); }
+
+  .poster-card-link {
+    display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.8rem;
+    font-family: 'Jost', sans-serif; font-size: 0.6rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); border-bottom: 1px solid rgba(139,111,94,0.3);
+    transition: opacity 0.2s;
+  }
+  .poster-card-link:hover { opacity: 0.65; }
+  footer {
+    border-top: 1px solid var(--faint); padding: 1.8rem 3.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--mid); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.in { opacity:1; transform:none; }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 1.8rem; }
+    nav ul { gap: 1.4rem; }
+    .page-header-inner { grid-template-columns: 1fr; padding: 4rem 2rem 2.5rem; }
+    .page-header-meta { text-align: left; }
+    .page-content { padding: 0 2rem 5rem; }
+    .research-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    .poster-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Aanya Gupta</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="honors.html">Honors</a></li>
+    <li><a href="leadership.html">Leadership</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="page-eyebrow">Publications &amp; Posters</div>
+      <h1 class="page-title">Research &amp; <em>Publications</em></h1>
+    </div>
+    <div class="page-header-meta">
+      2 first-author publications<br>
+      3 co-authored manuscripts<br>
+      5 conference posters
+    </div>
+  </div>
+</div>
+
+<div class="page-content">
+
+  <div class="research-intro reveal">
+    <p>My research sits at the intersection of <strong>computational immunology, machine learning, and data science</strong>. I have worked at Stanford's Maecker Lab since 10th grade, and have collaborated with the La Jolla Institute for Immunology and AIIMS/IIT-Delhi. My work focuses on building models to understand how biological systems — immune responses, aging, vaccine efficacy — behave at scale.</p>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="research-section-label reveal">Peer-Reviewed Publications</div>
+  <div class="research-list">
+
+    <div class="research-item reveal">
+      <div>
+        <div class="r-venue">Frontiers in Bioinformatics</div>
+        <div class="r-year">2024</div>
+        <span class="r-badge author">First Author</span>
+      </div>
+      <div>
+        <div class="r-title"><a href="https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2025.1636240/full" target="_blank">Comprehensive Analysis of Multi-Omics Vaccine Response Data Using MOFA and Stabl Algorithms</a></div>
+        <div class="r-journal">Frontiers in Bioinformatics · Stanford Maecker Lab</div>
+        <div class="r-desc">Statistical and ML-based analysis of the FluPRINT dataset. Researched various algorithms to address problems of large, complex datasets — creating models and tuning them through hyperparameter optimization. Explored the cellular and molecular underpinnings of successful antibody responses to flu vaccines using MoFA and Stabl algorithms.</div>
+        <a class="r-link" href="https://www.frontiersin.org/journals/bioinformatics/articles/10.3389/fbinf.2025.1636240/full" target="_blank">Read Paper ↗</a>
+      </div>
+    </div>
+
+    <div class="research-item reveal">
+      <div>
+        <div class="r-venue">Journal of Cellular Immunology</div>
+        <div class="r-year">2024</div>
+        <span class="r-badge author">First Author</span>
+      </div>
+      <div>
+        <div class="r-title"><a href="https://www.scientificarchives.com/article/serum-cytokines-during-acute-respiratory-infection-and-relationship-to-age" target="_blank">Serum Cytokines During Acute Respiratory Infection and Relationship to Age</a></div>
+        <div class="r-journal">Journal of Cellular Immunology · Stanford Maecker Lab</div>
+        <div class="r-desc">Investigated the relation between influenza and aging using statistical analysis, including linear regression and Mann-Whitney tests, of cytokine levels in the FluPRINT dataset. Explored how biological age modulates the inflammatory landscape during acute respiratory infection.</div>
+        <a class="r-link" href="https://www.scientificarchives.com/article/serum-cytokines-during-acute-respiratory-infection-and-relationship-to-age" target="_blank">Read Paper ↗</a>
+      </div>
+    </div>
+
+    <div class="research-item reveal">
+      <div>
+        <div class="r-venue">Nature Communications</div>
+        <div class="r-year">Submitted 2025</div>
+        <span class="r-badge coauthor">Co-Author</span>
+      </div>
+      <div>
+        <div class="r-title">A Community Effort to Address Reproducibility Issues in Post-Vaccination Response Prediction</div>
+        <div class="r-journal">Nature Communications (submitted) · CMI-PB Challenge · La Jolla Institute for Immunology</div>
+        <div class="r-desc">Participated in this global competition aimed at building the best model for predicting pertussis vaccine response. Placed <strong>1st in the T-cell Response Task</strong> — a competition open to university-level research teams worldwide. Effectively developed different methods including k-fold cross-validation and hyperparameter optimization of MoFA and Stabl models. Obtained 98% confidence interval of top correlation in cell frequency tasks. Presented at FOCIS Annual Meeting 2025.</div>
+      </div>
+    </div>
+
+    <div class="research-item reveal">
+      <div>
+        <div class="r-venue">Ophthalmology Retina</div>
+        <div class="r-year">Submitted 2025</div>
+        <span class="r-badge coauthor">Co-Author</span>
+      </div>
+      <div>
+        <div class="r-title">Characterization of the Clivus (Foveal-Retinal) Angle Using Retinal Imaging and Machine Learning</div>
+        <div class="r-journal">Ophthalmology Retina (submitted) · AIIMS / IIT-Delhi · EURETINA Congress 2025</div>
+        <div class="r-desc">Developed a semi-automated AI tool and evaluated other machine learning-based methods for predicting and determining possible effects of biological traits on foveal angle measurement. Created an age-based database for foveal angle in the Indian population. Mentored by Dr. Abhinav Kaushik (Harvard University) and Dr. Pradeep Venkatesh (AIIMS, New Delhi).</div>
+      </div>
+    </div>
+
+    <div class="research-item reveal">
+      <div>
+        <div class="r-venue">Under Preparation</div>
+        <div class="r-year">2025</div>
+        <span class="r-badge coauthor">Co-Author</span>
+      </div>
+      <div>
+        <div class="r-title">Bordetella Pertussis Challenge Induces Stronger Transcriptional Immune Responses in the Nasal Mucosa of Symptomatic Participants Than in Their Blood</div>
+        <div class="r-journal">Peters Lab · La Jolla Institute for Immunology</div>
+        <div class="r-desc">Deconvolution of nasal swab RNA-seq data using various computational methods. Utilized algorithms DWLS, FARDEEP, and CIBERSORT to optimize models predicting cell-type fractions in pertussis patients. Manuscript under preparation.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- POSTERS -->
+  <div class="research-section-label reveal" style="padding-top: 3.5rem;">Conference Presentations</div>
+  <div class="poster-grid reveal">
+    <div class="poster-card">
+      <div class="poster-card-conf">Asilomar Immunology Conference</div>
+      <div class="poster-card-title">Annual Stanford Immunology Scientific Conference</div>
+      <div class="poster-card-year">2024</div>
+      <!-- Replace # with path to your poster PDF, e.g. "posters/asilomar-2024.pdf" -->
+      <a class="poster-card-link" href="posters/asilomar-2024.pdf" target="_blank">View Poster ↗</a>
+    </div>
+    <div class="poster-card">
+      <div class="poster-card-conf">AAI Annual Meeting</div>
+      <div class="poster-card-title">American Association of Immunologists Annual Meeting</div>
+      <div class="poster-card-year">2025</div>
+      <a class="poster-card-link" href="posters/aai-2025.pdf" target="_blank">View Poster ↗</a>
+    </div>
+    <div class="poster-card">
+      <div class="poster-card-conf">MIT UROP Conference</div>
+      <div class="poster-card-title">MIT Undergraduate Research &amp; Technology Conference</div>
+      <div class="poster-card-year">2025</div>
+      <a class="poster-card-link" href="posters/mit-utrc-2025.pdf" target="_blank">View Poster ↗</a>
+    </div>
+    <div class="poster-card">
+      <div class="poster-card-conf">FOCIS Annual Meeting</div>
+      <div class="poster-card-title">Federation of Clinical Immunology Societies — included in eBook of Abstracts</div>
+      <div class="poster-card-year">2025</div>
+      <a class="poster-card-link" href="posters/focis-2025.pdf" target="_blank">View Poster ↗</a>
+    </div>
+    <div class="poster-card">
+      <div class="poster-card-conf">EURETINA Congress</div>
+      <div class="poster-card-title">European Society of Retina Specialists Congress</div>
+      <div class="poster-card-year">2025</div>
+      <a class="poster-card-link" href="posters/euretina-2025.pdf" target="_blank">View Poster ↗</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Aanya Gupta</p>
+  <p><a href="index.html" style="color:var(--accent);">← Back to Home</a></p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (e.target.dataset.d || 0) + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.dataset.d = i * 60;
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
